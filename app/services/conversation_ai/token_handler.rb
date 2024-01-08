@@ -8,8 +8,8 @@ class ConversationAi::TokenHandler
   end
 
   def raise_if_token_limit_exceeded
-    total_count = @chat.notes.pluck(:content).sum { |msg| token_count(msg) } + ConversationAi::MAX_TOKENS
-    raise ConversationAi::TokenLimitExceeded if total_count >= model_token_limit("gpt-3.5-turbo")
+    total_count = @chat.notes.pluck(:content).sum { |msg| token_count(msg) } + MAX_TOKENS
+    raise TokenLimitExceeded if total_count >= model_token_limit("gpt-3.5-turbo")
   end
 
   def prepare_messages_for_openai
